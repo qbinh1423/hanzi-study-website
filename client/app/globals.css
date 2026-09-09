@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --color-brand-500: #16A368;
+    --color-brand-600: #128A58;
+    --color-surface-card: #EEEEEE;
+    --color-surface-input: #FFFFFF;
+    --color-surface-icon: #D9D9D9;
+    --text-brand: #199E6E;
+    --bg-brand: #199E6E;
+    --border-brand: #199E6E;
+    --font-hanzi-quote: var(--font-ma-shan-zheng), cursive;
+}
+
+body {
+    background-color: #F9FAFB;
+    color: #111827;
+}
