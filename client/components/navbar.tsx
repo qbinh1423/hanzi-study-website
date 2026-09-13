@@ -7,13 +7,14 @@ import { GB } from "country-flag-icons/react/3x2";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 import { usePathname } from "next/navigation";
+import { routes } from "@/lib/routes.js";
 
 const nav_items = [
-  { label: "Home", href: "/" },
-  { label: "Roadmap", href: "/roadmap" },
-  { label: "Flashcards", href: "/flashcards" },
-  { label: "Vocabulary", href: "/vocabulary" },
-  { label: "Practice", href: "/practice" },
+  { label: "Home", href: routes.home },
+  { label: "Roadmap", href: routes.roadmap.root },
+  { label: "Flashcards", href: routes.flashcards.root },
+  { label: "Vocabulary", href: routes.vocabulary.root },
+  { label: "Practice", href: routes.practice.root },
 ];
 
 function DarkModeToggle() {
@@ -52,7 +53,6 @@ function DarkModeToggle() {
 }
 
 export default function Navbar() {
-  const [activeTab, setActiveTab] = useState("Home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathName = usePathname();
 
@@ -71,12 +71,14 @@ export default function Navbar() {
 
         <nav className="hidden lg:flex items-center bg-gray-50/80 dark:bg-gray-800/60 p-1 rounded-full border border-gray-100 dark:border-gray-700">
           {nav_items.map((item) => {
-            const isActive = pathName === item.href;
+            const isActive = item.href === routes.home
+              ? pathName === routes.home
+              : pathName === item.href || pathName.startsWith(item.href + "/");
             return (
-              <button
+              <Link
                 key={item.label}
-                type="button"
-                onClick={() => setActiveTab(item.label)}
+                href={item.href}
+                aria-current={isActive ? "page" : undefined}
                 className={`relative px-4 py-1.5 text-sm font-medium transition-colors rounded-full ${
                   isActive
                     ? "text-white"
@@ -91,7 +93,7 @@ export default function Navbar() {
                   />
                 )}
                 <span className="relative z-10">{item.label}</span>
-              </button>
+              </Link>
             );
           })}
         </nav>
@@ -107,12 +109,12 @@ export default function Navbar() {
           </button>
 
           <DarkModeToggle />
-          <button
-            type="button"
+          <Link
+            href={routes.auth.login}
             className="hidden lg:block text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-brand-500 transition-colors ml-1"
           >
             Sign In
-          </button>
+          </Link>
           <button
             type="button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -136,21 +138,23 @@ export default function Navbar() {
             className="lg:hidden overflow-hidden border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-[#0f172a]"
           >
             <div className="px-4 py-4 flex flex-col gap-1">
-              <button
-                type="button"
+              <Link
+                href={routes.auth.login}
                 className="w-full text-left px-4 py-3 rounded-xl bg-brand-500 text-white font-semibold text-sm mb-2"
               >
                 Sign In
-              </button>
+              </Link>
 
               {nav_items.map((item) => {
-                const isActive = pathName === item.href;
+                const isActive = item.href === routes.home
+                  ? pathName === routes.home
+                  : pathName === item.href || pathName.startsWith(item.href + "/");
                 return (
-                  <button
+                  <Link
                     key={item.label}
-                    type="button"
+                    href={item.href}
+                    aria-current={isActive ? "page" : undefined}
                     onClick={() => {
-                      setActiveTab(item.label);
                       setIsMenuOpen(false);
                     }}
                     className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
@@ -160,7 +164,7 @@ export default function Navbar() {
                     }`}
                   >
                     {item.label}
-                  </button>
+                  </Link>
                 );
               })}
 
