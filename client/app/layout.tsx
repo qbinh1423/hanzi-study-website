@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Inter, Ma_Shan_Zheng, Noto_Serif_TC } from "next/font/google";
+import { Poppins, Inter, Ma_Shan_Zheng, Noto_Serif_SC } from "next/font/google";
 import Script from "next/script";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
@@ -11,10 +11,10 @@ const maShanZheng = Ma_Shan_Zheng({
   subsets: ["latin"],
   variable: "--font-ma-shan-zheng",
 });
-const notoSerifTraditionalChinese = Noto_Serif_TC({
-  weight: "400",
+const notoSerifSimplifiedChinese = Noto_Serif_SC({
+  weight: ["400", "700", "900"],
   subsets: ["latin"],
-  variable: "--font-noto-serif-traditional-chinese",
+  variable: "--font-noto-serif-simplified-chinese",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${inter.variable} ${maShanZheng.variable} ${notoSerifTraditionalChinese.variable} h-full antialiased`}
+      className={`${poppins.variable} ${inter.variable} ${maShanZheng.variable} ${notoSerifSimplifiedChinese.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">

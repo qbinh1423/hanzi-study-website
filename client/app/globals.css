@@ -12,6 +12,7 @@
     --bg-brand: #199E6E;
     --border-brand: #199E6E;
     --font-hanzi-quote: var(--font-ma-shan-zheng), cursive;
+    --font-hanzi-serif: var(--font-noto-serif-simplified-chinese), serif;
 }
 
 body {

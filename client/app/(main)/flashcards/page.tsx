@@ -178,7 +178,7 @@ export default function FlashcardsPage() {
   }, [againCards, startSession]);
 
   return (
-    <div className="w-full min-h-[calc(100vh)] bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex flex-col items-center justify-start py-8 px-4 select-none transition-colors duration-300">
+    <div className="w-full min-h-[calc(100vh-4rem)] sm:min-h-[calc(100vh-5rem)] bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex flex-col items-center justify-start py-8 px-4 select-none transition-colors duration-300">
       <div className="flex items-center gap-2 overflow-x-auto max-w-full pb-2 no-scrollbar">
         {HSK_LEVELS.map((lvl) => {
           const isActive = selectedHsk === lvl.id;
@@ -291,7 +291,7 @@ export default function FlashcardsPage() {
                   </div>
                   <div className="my-auto py-4">
                     <div className="flex items-center justify-center gap-3">
-                      <span className="text-6xl font-serif font-bold text-gray-900 dark:text-white tracking-wide">
+                      <span className="font-[family-name:var(--font-hanzi-serif)] text-6xl font-bold text-gray-900 dark:text-white tracking-wide">
                         {currentCard.hanzi}
                       </span>
                       <button
@@ -324,7 +324,7 @@ export default function FlashcardsPage() {
                 <div className="absolute inset-0 w-full h-full p-6 flex flex-col justify-between items-center [backface-visibility:hidden] [transform:rotateY(180deg)]">
                   <span className="text-xs font-bold text-gray-400">Meaning & Example</span>
                   <div className="space-y-3 my-auto w-full px-2 sm:px-4 flex flex-col items-center">
-                    <span className="text-6xl font-serif font-bold text-gray-900 dark:text-white tracking-wide mt-3">
+                    <span className="text-6xl font-[family-name:var(--font-hanzi-serif)] font-bold text-gray-900 dark:text-white tracking-wide mt-3">
                       {currentCard.hanzi}
                     </span>
                     <p className="text-2xl font-bold text-gray-900 dark:text-white text-center pt-5">
@@ -336,7 +336,10 @@ export default function FlashcardsPage() {
                   </div>
                 </div>
               </motion.div>
-              <AnimatePresence>
+              
+            </div>
+          </div>
+          <AnimatePresence>
                 {showHandWriting && (
                   <HandwritingModal
                     hanzi={currentCard.hanzi}
@@ -345,8 +348,6 @@ export default function FlashcardsPage() {
                   />
                 )}
               </AnimatePresence>
-            </div>
-          </div>
 
           <div className="w-full max-w-[460px] mt-6 space-y-2">
             <div className="w-full bg-gray-200 dark:bg-gray-800 h-2 rounded-full overflow-hidden">
